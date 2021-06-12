@@ -9,6 +9,7 @@ import "../../../cldr-code/src/main/resources/org/unicode/cldr/tool/reports.css"
 // module stylesheets need to go here. See cldrVueRouter.js
 // example: import 'someModule/dist/someModule.css'
 import "ant-design-vue/dist/antd.css";
+import "bootswatch/dist/spacelab/bootstrap.min.css";
 
 // local modules
 import { showPanel, createCldrApp } from "./cldrVueRouter.js";
