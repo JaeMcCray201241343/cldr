@@ -30,17 +30,20 @@
             <span class="reason" v-if="showReason">{{
               getReason(reason, attribute)
             }}</span>
-            <!-- show the Go button, only if we have locale AND xpath. Show always, so we can navigate   -->
+            <!-- show the Go button, only if we have locale AND xpath. Hide if we're already there.  -->
             <a-button
               size="small"
               shape="round"
-              v-if="locale && xpath"
+              v-if="
+                locale &&
+                xpath &&
+                (locale != currentLocale.value || xpath != currentId.value)
+              "
               @click="go(locale, xpath)"
               >Jump</a-button
             >
           </p>
           <!-- only show on change -->
-          <!-- <b v-if="locale" v-bind:title="Locale ID">{{ locale }}</b> -->
           <div v-if="newXpath" class="xpath">
             {{ xpathFull }}
           </div>
@@ -63,12 +66,15 @@ export default {
     let itemXpath = ref("");
     let inheritance = ref(null);
     let reasons = ref(null);
+    const { currentLocale, currentId } = cldrStatus.refs;
     return {
       visible,
       itemLocale,
       itemXpath,
       inheritance,
       reasons,
+      currentLocale,
+      currentId,
     };
   },
   methods: {
